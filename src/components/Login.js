@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withAxios } from '../hocs/withAxios';
 
 const initialState = {
 	username: '',
@@ -7,6 +8,7 @@ const initialState = {
 
 const Login = (props) => {
 	const [state, setState] = useState(initialState);
+	const axios = withAxios();
 
 	const handleChange = (e) => {
 		setState({
@@ -17,7 +19,15 @@ const Login = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(state);
+		(async () => {
+			const {
+				data: { token },
+			} = await axios.post('/login', state);
+
+			localStorage.setItem('token', token);
+
+			setState(initialState);
+		})();
 	};
 
 	return (
