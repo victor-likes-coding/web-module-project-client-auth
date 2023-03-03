@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
+	const token = localStorage.getItem('token');
 	return (
 		<header className="nav">
 			<h1 className="nav__title">FRIENDS DATABASE</h1>
@@ -9,7 +10,7 @@ const Nav = () => {
 				<NavLink to="/">LOGIN.</NavLink>
 				<NavLink to="/friends">FRIENDLIST.</NavLink>
 				<NavLink to="/add">ADDFRIEND.</NavLink>
-				<NavLink to="/logout">LOGOUT</NavLink>
+				{token && <NavLink to="/logout">LOGOUT</NavLink>}
 			</nav>
 		</header>
 	);
