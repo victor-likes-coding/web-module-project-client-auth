@@ -10,7 +10,7 @@ const Nav = () => {
             <nav className="nav__links">
                 {!token && <NavLink to="/">LOGIN.</NavLink>}
                 {token && <NavLink to="/friends">FRIENDLIST.</NavLink>}
-                {token && <NavLink to="/add">ADDFRIEND.</NavLink>}
+                {token && <NavLink to="/friends/add">ADDFRIEND.</NavLink>}
                 {token && <NavLink to="/logout">LOGOUT</NavLink>}
             </nav>
         </header>

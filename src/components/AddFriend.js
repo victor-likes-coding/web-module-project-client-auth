@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContext } from "../App";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { withAxios } from "../hocs/withAxios";
 
 const initialState = {
     name: "",
@@ -9,6 +9,8 @@ const initialState = {
 
 const AddFriend = () => {
     const [state, setState] = useState(initialState);
+    const axios = withAxios();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setState({
@@ -19,6 +21,20 @@ const AddFriend = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // post data to /api/friends
+        // reset state
+        // redirect to /friends
+
+        (async () => {
+            try {
+                await axios.post("/friends", state);
+                setState(initialState);
+                navigate("/friends", { replace: true });
+            } catch (err) {
+                console.log(err);
+            }
+        })();
     };
 
     return (

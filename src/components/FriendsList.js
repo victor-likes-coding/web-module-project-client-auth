@@ -3,17 +3,12 @@ import { withAxios } from "../hocs/withAxios";
 
 const FriendsList = () => {
     // use /api/friends to get the list of friends from the API
-    const token = localStorage.getItem("token");
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await withAxios().get("/friends", {
-                    headers: {
-                        Authorization: token,
-                    },
-                });
+                const res = await withAxios().get("/friends");
                 setFriends(res.data);
             } catch (err) {
                 console.log(err);
