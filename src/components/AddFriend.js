@@ -3,12 +3,11 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../App";
 
 const initialState = {
-    username: "",
-    password: "",
+    name: "",
+    email: "",
 };
 
-const Login = () => {
-    const { login, token } = useContext(AuthContext);
+const AddFriend = () => {
     const [state, setState] = useState(initialState);
 
     const handleChange = (e) => {
@@ -20,33 +19,30 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        login(() => setState(initialState))(state);
     };
 
-    return token ? (
-        <Navigate to="/friends" />
-    ) : (
+    return (
         <form
-            className="login"
+            className="add-friend"
             onSubmit={handleSubmit}>
-            <h2>LOGIN</h2>
-            <label htmlFor="username">USERNAME</label>
+            <h2>ADD FRIEND</h2>
+            <label htmlFor="name">FRIEND NAME</label>
             <input
-                data-testid="username"
+                data-testid="name"
                 type="text"
-                id="username"
-                name="username"
-                value={state.username}
+                id="name"
+                name="name"
+                value={state.name}
                 onChange={handleChange}
             />
 
-            <label htmlFor="password">PASSWORD</label>
+            <label htmlFor="email">FRIEND EMAIL</label>
             <input
-                data-testid="password"
-                type="password"
-                id="password"
-                name="password"
-                value={state.password}
+                data-testid="email"
+                type="text"
+                id="email"
+                name="email"
+                value={state.email}
                 onChange={handleChange}
             />
 
@@ -55,4 +51,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AddFriend;
